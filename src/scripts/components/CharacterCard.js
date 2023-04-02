@@ -80,7 +80,7 @@ class CharacterCard extends HTMLElement {
   }
 }
 
-function renderRarityStar(rarity) {
+const renderRarityStar = (rarity) => {
   let svg = ``;
   for (let i = 0; i < rarity; i++) {
     svg += /* HTML */ `<svg
@@ -102,39 +102,39 @@ function renderRarityStar(rarity) {
     </svg>`;
   }
   return svg;
-}
+};
 
-function renderVisionIcon(vision) {
-  let img = /* HTML */ `<img
+const renderVisionIcon = (vision) => {
+  const img = /* HTML */ `<img
     src="./assets/vision/${vision}.png"
     alt=""
     class="h-5 w-5"
     onerror="this.onerror=null; this.src='./assets/vision/anemo.png'"
   />`;
   return img;
-}
+};
 
-function renderWeaponIcon(weapon) {
-  let img = /* HTML */ `<img
+const renderWeaponIcon = (weapon) => {
+  const img = /* HTML */ `<img
     src="./assets/weapon/Weapon-class-${weapon}-icon.webp"
     alt=""
     class="h-5 w-5"
     onerror="this.onerror=null; this.src=''"
   />`;
   return img;
-}
+};
 
-function renderEmblemIcon(nation) {
-  let img = /* HTML */ `<img
+const renderEmblemIcon = (nation) => {
+  const img = /* HTML */ `<img
     src="./assets/nation/Emblem_${nation}.webp"
     alt=""
     class="h-5 w-5"
     onerror="this.onerror=null; this.src='./assets/nation/Emblem_Nation_Unknown.webp'"
   />`;
   return img;
-}
+};
 
-function renderCardBack(name) {
+const renderCardBack = (name) => {
   let thisName = name;
   let img = ``;
 
@@ -148,6 +148,6 @@ function renderCardBack(name) {
   />`;
 
   return img;
-}
+};
 
 customElements.define("character-card", CharacterCard);

@@ -4,29 +4,43 @@ import "./components/HeaderComp";
 import "./components/CharacterCard";
 import "./components/MainComp";
 import "./components/FooterComp";
+// import "regenerator-runtime/runtime";
 
 // const html = (strings, ...values) => String.raw({ raw: strings }, ...values);
 const baseUrl = `https://api.genshin.dev/characters`;
 
-function main() {
-  async function getCharacters() {
+const main = () => {
+  const getCharacters = async () => {
     try {
       const config = {
         headers: {
           Accept: "application/json",
         },
       };
+      const mainElement = document.querySelector("main");
+      const loadingElement = document.createElement("div");
+      loadingElement.innerHTML = `Loading...`;
+      loadingElement.classList.add(
+        "text-white",
+        "text-center",
+        "text-xl",
+        "font-semibold"
+      );
+      mainElement.appendChild(loadingElement);
+
       const nameResponse = await axios.get(`${baseUrl}`, config);
       const charactersName = nameResponse.data;
       const characters = await getCharacterDetail(charactersName);
-      console.log(characters);
+
+      mainElement.removeChild(loadingElement);
+
       renderCharacterList(characters);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  async function getCharacterDetail(charactersName) {
+  const getCharacterDetail = async (charactersName) => {
     try {
       const config = {
         headers: {
@@ -55,13 +69,13 @@ function main() {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   document.addEventListener("DOMContentLoaded", () => {
     getCharacters();
   });
 
-  function renderCharacterList(characters) {
+  const renderCharacterList = (characters) => {
     const characterListElement = document.querySelector("main-item");
 
     characters.forEach((character, i) => {
@@ -70,7 +84,7 @@ function main() {
       characterCard.character = character;
       characterListElement.appendChild(characterCard);
     });
-  }
-}
+  };
+};
 
 export default main;
