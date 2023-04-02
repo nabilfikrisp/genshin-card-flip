@@ -109,7 +109,7 @@ function renderVisionIcon(vision) {
     src="./assets/vision/${vision}.png"
     alt=""
     class="h-5 w-5"
-    onerror="this.onerror=null; this.src=''"
+    onerror="this.onerror=null; this.src='./assets/vision/anemo.png'"
   />`;
   return img;
 }
