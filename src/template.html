@@ -5,18 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%=htmlWebpackPlugin.options.title %></title>
-    <link rel="stylesheet" href="./style/style.css" />
   </head>
   <body class="bg-[#20242c]">
-    <h1 class="mb-2 py-8 text-center text-4xl font-semibold text-[#deb76c]">
-      Genshinku
-    </h1>
-    <main id="content" class="px-5 w-full mb-10">
-      <div
-        class="mx-auto flex flex-wrap items-center justify-center gap-4"
-        id="characterList"
-      ></div>
+    <header>
+      <header-item></header-item>
+    </header>
+
+    <main class="mb-10 w-full px-5" id="content">
+      <main-item></main-item>
     </main>
-    
+
+    <footer-item></footer-item>
   </body>
 </html>
