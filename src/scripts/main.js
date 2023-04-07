@@ -92,10 +92,6 @@ const main = () => {
       characterListElement.appendChild(characterCard);
     });
   };
-
-  function importAll(r) {
-    return r.keys().map(r);
-  }
 };
 
 export default main;
