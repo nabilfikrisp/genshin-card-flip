@@ -105,8 +105,10 @@ const renderRarityStar = (rarity) => {
 };
 
 const renderVisionIcon = (vision) => {
+  const thisVision = vision.toLowerCase();
+  const imagesrc = require(`../../assets/vision/${thisVision}.png`);
   const img = /* HTML */ `<img
-    src="./assets/vision/${vision}.png"
+    src="${imagesrc}"
     alt=""
     class="h-5 w-5"
     onerror="this.onerror=null; this.src='./assets/vision/anemo.png'"
@@ -115,8 +117,10 @@ const renderVisionIcon = (vision) => {
 };
 
 const renderWeaponIcon = (weapon) => {
+  const thisWeapon = weapon.toLowerCase();
+  const imagesrc = require(`../../assets/weapon/Weapon-class-${thisWeapon}-icon.webp`);
   const img = /* HTML */ `<img
-    src="./assets/weapon/Weapon-class-${weapon}-icon.webp"
+    src="${imagesrc}"
     alt=""
     class="h-5 w-5"
     onerror="this.onerror=null; this.src=''"
@@ -125,8 +129,14 @@ const renderWeaponIcon = (weapon) => {
 };
 
 const renderEmblemIcon = (nation) => {
+  let thisNation = nation;
+  if (thisNation === "Snezhnaya" || thisNation === "Outlander") {
+    thisNation = "Unknown";
+  }
+  const imgsrc = require(`../../assets/nation/Emblem_${thisNation}.webp`);
+
   const img = /* HTML */ `<img
-    src="./assets/nation/Emblem_${nation}.webp"
+    src="${imgsrc}"
     alt=""
     class="h-5 w-5"
     onerror="this.onerror=null; this.src='./assets/nation/Emblem_Nation_Unknown.webp'"
@@ -136,12 +146,16 @@ const renderEmblemIcon = (nation) => {
 
 const renderCardBack = (name) => {
   let thisName = name;
-  let img = ``;
 
   thisName = thisName.replace(/\s+/g, "_").toLowerCase();
+  if (thisName.includes("traveler")) {
+    thisName = "traveler";
+  }
+
+  let image = require(`../../assets/${thisName}.png`);
 
   img = /* HTML */ `<img
-    src="./assets/${thisName}.png"
+    src="${image}"
     alt=""
     class="h-full w-full object-contain"
     onerror="this.onerror=null; this.src='./assets/traveler.png'"

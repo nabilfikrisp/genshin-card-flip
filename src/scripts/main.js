@@ -7,7 +7,7 @@ import "./components/FooterComp";
 // import "regenerator-runtime/runtime";
 
 // const html = (strings, ...values) => String.raw({ raw: strings }, ...values);
-const baseUrl = `https://api.genshin.dev/characters`;
+const BASE_URL = `https://api.genshin.dev/characters`;
 
 const main = () => {
   const getCharacters = async () => {
@@ -18,6 +18,7 @@ const main = () => {
         },
       };
       const mainElement = document.querySelector("main");
+
       const loadingElement = document.createElement("div");
       loadingElement.innerHTML = `Loading...`;
       loadingElement.classList.add(
@@ -28,7 +29,7 @@ const main = () => {
       );
       mainElement.appendChild(loadingElement);
 
-      const nameResponse = await axios.get(`${baseUrl}`, config);
+      const nameResponse = await axios.get(`${BASE_URL}`, config);
       const charactersName = nameResponse.data;
       const characters = await getCharacterDetail(charactersName);
 
@@ -48,10 +49,16 @@ const main = () => {
         },
       };
       const requests = charactersName.map(async (character) => {
-        const response = await axios.get(`${baseUrl}/${character}`, config);
+        const response = await axios.get(`${BASE_URL}/${character}`, config);
         let imagesrc = response.data.name;
 
         imagesrc = imagesrc.replace(/\s+/g, "_").toLowerCase();
+
+        let image = require(`../assets/${imagesrc}_face.png`);
+        // if (require("../assets/" + imagesrc + "_face.png")) {
+        //   image = require("../assets/" + imagesrc + "_face.png");
+        // }
+        // console.log(image);
         return {
           name:
             response.data.name === "Traveler"
@@ -61,7 +68,7 @@ const main = () => {
           weapon: response.data.weapon,
           nation: response.data.nation,
           rarity: response.data.rarity,
-          imagesrc: `./assets/${imagesrc}_face.png`,
+          imagesrc: image,
         };
       });
       const responses = await Promise.all(requests);
@@ -85,6 +92,10 @@ const main = () => {
       characterListElement.appendChild(characterCard);
     });
   };
+
+  function importAll(r) {
+    return r.keys().map(r);
+  }
 };
 
 export default main;
